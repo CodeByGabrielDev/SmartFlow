@@ -1,6 +1,8 @@
 package Entities;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,9 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import net.bytebuddy.utility.nullability.MaybeNull;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Movimentacao {
@@ -22,13 +22,21 @@ public class Movimentacao {
 	@JoinColumn(name = "id_pessoa")
 	private Pessoa pessoa;
 	@Column(name = "preco", nullable = false)
-	private double price;
+	private Double price;
 	@Column(name = "data_venda")
 	private LocalDateTime dataVenda;
-
+	@OneToMany(mappedBy = "movimentacaoVinculada")
+	private List<MovimentacoesProdutos> produtosMovimentacao = new ArrayList<>();
 	private boolean cancelada;
 	@Column(name = "valor_cancelado")
 	private Double valorCancelado;
+	@Column(name = "data_cancelamento")
+	private LocalDateTime dataCancelamento;
+
+	
+	public Movimentacao() {
+
+	}
 
 	public Movimentacao(Pessoa pessoa, double price) {
 		this.pessoa = pessoa;
@@ -36,6 +44,7 @@ public class Movimentacao {
 		cancelada = false;
 		dataVenda = LocalDateTime.now();
 		valorCancelado = null;
+		dataCancelamento = null;
 	}
 
 	public int getTicket() {
@@ -54,11 +63,11 @@ public class Movimentacao {
 		this.pessoa = pessoa;
 	}
 
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
@@ -85,6 +94,21 @@ public class Movimentacao {
 	public void setValorCancelado(Double valorCancelado) {
 		this.valorCancelado = valorCancelado;
 	}
-	
+
+	public List<MovimentacoesProdutos> getProdutosMovimentacao() {
+		return produtosMovimentacao;
+	}
+
+	public void setProdutosMovimentacao(List<MovimentacoesProdutos> produtosMovimentacao) {
+		this.produtosMovimentacao = produtosMovimentacao;
+	}
+
+	public LocalDateTime getDataCancelamento() {
+		return dataCancelamento;
+	}
+
+	public void setDataCancelamento(LocalDateTime dataCancelamento) {
+		this.dataCancelamento = dataCancelamento;
+	}
 
 }

@@ -19,11 +19,12 @@ public class Produtos {
 
 	@Column(name = "referencia")
 	private String referencia;
-
+	
 	private double preco_peca;
-
+	@OneToMany(mappedBy = "produtoVinculado")
+	private List<MovimentacoesProdutos> productVinculado = new ArrayList<>();
 	@OneToMany(mappedBy = "product")
-	List<NotaFiscalItem> notaFiscalItem = new ArrayList<>();
+	private List<NotaFiscalItem> notaFiscalItem = new ArrayList<>();
 
 	public Produtos() {
 

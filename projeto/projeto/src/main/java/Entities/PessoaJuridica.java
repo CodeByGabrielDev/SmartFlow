@@ -12,6 +12,10 @@ public class PessoaJuridica extends Pessoa {
 	@Column(name = "nome_fantasia")
 	private String nomeFantasia;
 
+	public PessoaJuridica() {
+
+	}
+
 	public PessoaJuridica(String nome, String cnpj, String nomeFantasia) {
 		super(nome);
 		this.cnpj = cnpj;

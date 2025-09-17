@@ -1,5 +1,6 @@
 package Entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -22,6 +24,13 @@ public class Pessoa {
 	private String nome;
 	@OneToMany(mappedBy = "pessoa")
 	private List<Movimentacao> venda;
+	@OneToMany(mappedBy = "pessoa")
+	private List<NotaFiscal>notas = new ArrayList<>();
+	
+
+	public Pessoa() {
+
+	}
 
 	public Pessoa(String nome) {
 		super();
@@ -43,5 +52,22 @@ public class Pessoa {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public List<Movimentacao> getVenda() {
+		return venda;
+	}
+
+	public void setVenda(List<Movimentacao> venda) {
+		this.venda = venda;
+	}
+
+	public List<NotaFiscal> getNotas() {
+		return notas;
+	}
+
+	public void setNotas(List<NotaFiscal> notas) {
+		this.notas = notas;
+	}
+	
 
 }

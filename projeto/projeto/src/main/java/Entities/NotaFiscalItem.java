@@ -21,16 +21,23 @@ public class NotaFiscalItem {
 	@ManyToOne
 	@JoinColumn(name = "id_produto")
 	private Produtos product;
+	@Column(name = "referencia_produt0",nullable = false)
+	private String produtoReferencia;
 
 	public NotaFiscalItem() {
 
 	}
 
-	public NotaFiscalItem(NotaFiscal notaFiscal, Produtos product) {
+	
 
+	public NotaFiscalItem(NotaFiscal notaFiscal, Produtos product, String produtoReferencia) {
+		super();
 		this.notaFiscal = notaFiscal;
 		this.product = product;
+		this.produtoReferencia = produtoReferencia;
 	}
+
+
 
 	public int getId() {
 		return id;
@@ -56,4 +63,16 @@ public class NotaFiscalItem {
 		this.product = product;
 	}
 
+
+
+	public String getProdutoReferencia() {
+		return produtoReferencia;
+	}
+
+
+
+	public void setProdutoReferencia(String produtoReferencia) {
+		this.produtoReferencia = produtoReferencia;
+	}
+	
 }

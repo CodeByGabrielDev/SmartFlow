@@ -1,6 +1,7 @@
 package Entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,24 +25,35 @@ public class NotaFiscal {
 	private double price;
 	@Column(name = "natureza_operacao")
 	private int CFOP;
-	@Column(name = "registro_cliente")
-	private String registroCliente;
+	@ManyToOne
+	@JoinColumn(name = "id_pessoa_vinculada", nullable = true)
+	private Pessoa pessoa;
 	@OneToMany(mappedBy = "notaFiscal")
 	List<NotaFiscalItem> notaFiscalItem = new ArrayList<>();
+	@Column(name = "data_emissao")
+	private LocalDateTime emissao;
 	@Column(nullable = false)
 	private boolean inutilizada;
 	@Column(name = "data_inutilizacao")
 	private LocalDate dataInutilizacao;
+	@Column(name = "nota_cancelada")
+	private boolean notaCancelada;
+	@ManyToOne
+	@JoinColumn(name = "status_NFE")
+	private StatusNFE status;
 
 	public NotaFiscal() {
 
 	}
 
-	public NotaFiscal(int cFOP) {
-
+	public NotaFiscal(int cFOP, double price, Pessoa pessoa) {
 		CFOP = cFOP;
+		this.price = price;
+		this.pessoa = pessoa;
 		inutilizada = false;
 		dataInutilizacao = null;
+		notaCancelada = false;
+		emissao = LocalDateTime.now();
 	}
 
 	public int getSequencial() {
@@ -90,6 +102,46 @@ public class NotaFiscal {
 
 	public void setNotaFiscalItem(List<NotaFiscalItem> notaFiscalItem) {
 		this.notaFiscalItem = notaFiscalItem;
+	}
+
+	public Pessoa getRegistroCliente() {
+		return pessoa;
+	}
+
+	public void setRegistroCliente(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+
+	public LocalDateTime getEmissao() {
+		return emissao;
+	}
+
+	public void setEmissao(LocalDateTime emissao) {
+		this.emissao = emissao;
+	}
+
+	public boolean isNotaCancelada() {
+		return notaCancelada;
+	}
+
+	public void setNotaCancelada(boolean notaCancelada) {
+		this.notaCancelada = notaCancelada;
+	}
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
+
+	public StatusNFE getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusNFE status) {
+		this.status = status;
 	}
 
 }

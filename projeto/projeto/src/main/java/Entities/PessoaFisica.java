@@ -17,6 +17,10 @@ public class PessoaFisica extends Pessoa {
 	@Column(nullable = false)
 	private LocalDate data_cadastramento;
 
+	public PessoaFisica() {
+
+	}
+
 	public PessoaFisica(String nome, int idade, String cpf) {
 		super(nome);
 		this.idade = idade;

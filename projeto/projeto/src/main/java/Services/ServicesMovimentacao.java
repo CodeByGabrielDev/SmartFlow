@@ -1,31 +1,41 @@
 package Services;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import DAO.MovimentacaoDAO;
 import Entities.Movimentacao;
+import Entities.Produtos;
 import Utils.JPAUtils;
 
 public class ServicesMovimentacao {
 	MovimentacaoDAO mov = new MovimentacaoDAO();
+	ServiceMovimentacaoProduto serviceProdutoMov = new ServiceMovimentacaoProduto();
+	ServicesNotaFiscal serviceNotaFIscal = new ServicesNotaFiscal();
 
-	public void realizarMovimentacao(Movimentacao mov) {
-		EntityManager em = JPAUtils.getEmf();
+	public void realizarMovimentacao(EntityManager em, List<Produtos> listaDeProdutos, Movimentacao mov) {
 		EntityTransaction et = em.getTransaction();
 		et.begin();
-
 		try {
 			if (mov != null) {
 				this.mov.insert(em, mov);
+
+				serviceProdutoMov.inserirDadosMovimentacaoProduto(em, listaDeProdutos, mov);
+				serviceNotaFIscal.emitirNotaFiscal(em, listaDeProdutos, mov);
 				et.commit();
 			}
+
 		} catch (Exception e) {
-			et.rollback();
+			if (et.isActive()) {
+				et.rollback();
+				System.out.println("rollback!");
+			} else {
+				System.out.println("sem rollback");
+			}
 			throw new RuntimeException("Error to make a transcation " + e.getMessage());
 		} finally {
 			em.close();
@@ -33,8 +43,8 @@ public class ServicesMovimentacao {
 		}
 	}
 
-	public void cancelarMovimentacao(int id) {
-		EntityManager em = JPAUtils.getEmf();
+	public void cancelarMovimentacao(EntityManager em, int id) {
+
 		EntityTransaction et = em.getTransaction();
 		et.begin();
 		Movimentacao movBuscada = this.mov.selectById(em, id);
@@ -46,9 +56,9 @@ public class ServicesMovimentacao {
 					throw new RuntimeException("It is not possible to cancel after 10 minutes ");
 				} else {
 					movBuscada.setCancelada(true);
-					movBuscada.setDataVenda(LocalDateTime.now());
 					movBuscada.setValorCancelado(movBuscada.getPrice());
-					movBuscada.setPrice(0);
+					movBuscada.setPrice(0.0);
+					movBuscada.setDataCancelamento(LocalDateTime.now());
 					et.commit();
 				}
 			}
