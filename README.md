@@ -1,15 +1,18 @@
-# Invoice & Transaction Management System
+# 🚀 **SmartFlow - Invoice & Transaction Management System**
 
-## 📌 Description
-This project is a **Java-based system** designed to manage invoices, transactions, products, and customers.  
-It follows the **MVC architecture** and applies **DAO and Service patterns** to ensure clean separation of concerns and maintainability.  
-The project uses **JPA/Hibernate** for persistence and **MySQL** as the database.  
+> **Note:** This project is still under development. Some features are in progress.
 
-> ⚠️ **Note:** This project is still in development and some features are being implemented.  
+## 📌 **Description**
 
----
+SmartFlow is a powerful Java-based system designed to streamline the management of **invoices**, **transactions**, **products**, and **customers**. It leverages **JPA/Hibernate** for persistence and **MySQL** for database management, ensuring optimal performance and scalability. 
 
-## 🛠️ Technologies Used
+This project implements the **MVC architecture** for clean separation of concerns, and follows **DAO** and **Service patterns** to ensure maintainability and testability of the codebase. It also includes advanced features like **stored procedures** and **database triggers** for efficient transaction management.
+
+## ⚠️ **Project Status**
+Currently in development. Some features, like advanced reporting and database trigger integration, are still being implemented.
+
+## 🛠️ **Technologies Used**
+
 - **Java 17+**
 - **JPA / Hibernate**
 - **MySQL**
@@ -17,9 +20,8 @@ The project uses **JPA/Hibernate** for persistence and **MySQL** as the database
 - **MVC Architecture**
 - **Stored Procedures & Database Triggers**
 
----
+## 📂 **Project Structure**
 
-## 📂 Project Structure
 src/
 ├── DAO/ # Data Access Objects (CRUD operations)
 ├── Entities/ # Entity classes (Pessoa, NotaFiscal, Produto, etc.)
@@ -30,39 +32,39 @@ src/
 markdown
 Copiar código
 
-### Main Entities
-- `Pessoa`
-- `PessoaFisica`
-- `PessoaJuridica`
-- `Produto`
-- `Movimentacao`
-- `MovimentacaoItem`
-- `NotaFiscal`
-- `NotaFiscalItem`
+## 🔑 **Main Entities**
 
----
+- **Pessoa** (Customer)
+- **PessoaFisica** (Individual Customer)
+- **PessoaJuridica** (Corporate Customer)
+- **Produto** (Product)
+- **Movimentacao** (Transaction)
+- **MovimentacaoItem** (Transaction Item)
+- **NotaFiscal** (Invoice)
+- **NotaFiscalItem** (Invoice Item)
 
-## 🚀 Features (in progress)
-- [x] Create and persist **transactions (Movimentacao)**
-- [x] Generate and manage **invoices (NotaFiscal)**
-- [x] Register and manage **customers (PessoaFisica & PessoaJuridica)**
-- [ ] Implement reporting and queries
-- [ ] Add validations and business rules
-- [ ] Integrate more advanced database triggers
+## 🚀 **Features (In Progress)**
 
----
+- Create and persist transactions (`Movimentacao`)
+- Generate and manage invoices (`NotaFiscal`)
+- Register and manage customers (`PessoaFisica` & `PessoaJuridica`)
+- Implement reporting and queries
+- Add validations and business rules
+- Integrate advanced database triggers
 
-## 📖 How to Run
+## 📖 **How to Run**
+
 1. Clone the repository:
+
    ```bash
-   git clone https://github.com/your-username/invoice-transaction-system.git
+   git clone https://github.com/your-username/smartflow.git
 Import the project into your IDE (IntelliJ / Eclipse).
 
 Configure your MySQL database and update persistence.xml.
 
 Run the application and test the features.
 
-📌 Roadmap
+📝 Roadmap
 Add unit tests (JUnit)
 
 Create REST API layer
@@ -72,16 +74,7 @@ Implement front-end integration
 Expand reporting module
 
 🤝 Contributing
-This project is open for learning and improvements. Feel free to fork and submit pull requests.
+This project is open for contributions and improvements. Feel free to fork the repository and submit pull requests.
 
 📜 License
 This project is licensed under the MIT License.
-
-yaml
-Copiar código
-
----
-
-👉 Esse script já está pronto para você colar como `README.md`.  
-
-Quer que eu já adapte o **nome e URL do repositório** com uma das sugestões que te dei antes (`invoice-transaction-system` ou `business-management-system`)?
