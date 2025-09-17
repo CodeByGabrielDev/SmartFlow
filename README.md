@@ -1,80 +1,92 @@
-# 🚀 **SmartFlow - Invoice & Transaction Management System**
+# 💼 SmartFlow - Invoice & Transaction Management System
 
-> **Note:** This project is still under development. Some features are in progress.
+**SmartFlow** is a Java-based backend application designed to manage invoices, transactions, customers, and products with structured business rules. It uses **JPA/Hibernate** for persistence, follows the **MVC architecture**, and applies **DAO and Service layers** for clean separation of concerns and scalability.
 
-## 📌 **Description**
+> ⚠️ The project is in development. Some features may be incomplete or in progress.
 
-SmartFlow is a powerful Java-based system designed to streamline the management of **invoices**, **transactions**, **products**, and **customers**. It leverages **JPA/Hibernate** for persistence and **MySQL** for database management, ensuring optimal performance and scalability. 
+---
 
-This project implements the **MVC architecture** for clean separation of concerns, and follows **DAO** and **Service patterns** to ensure maintainability and testability of the codebase. It also includes advanced features like **stored procedures** and **database triggers** for efficient transaction management.
+## ⚙️ Key Features
 
-## ⚠️ **Project Status**
-Currently in development. Some features, like advanced reporting and database trigger integration, are still being implemented.
+- ✅ Create and manage sales transactions
+- ✅ Auto-generate invoices linked to transactions
+- ✅ Time-based cancellation rules (e.g., invoices cannot be canceled after 10 minutes)
+- ✅ Entity relationship handling with automated Many-to-Many logic
+- 🛠️ Business rules applied through service layer
+- 🛠️ Prepared for integration with Spring (future)
 
-## 🛠️ **Technologies Used**
+---
 
-- **Java 17+**
-- **JPA / Hibernate**
-- **MySQL**
-- **DAO & Service Layers**
-- **MVC Architecture**
-- **Stored Procedures & Database Triggers**
+## 🛠️ Tech Stack
 
-## 📂 **Project Structure**
+- Java 17+
+- JPA / Hibernate
+- MySQL
+- MVC Architecture
+- DAO & Service Pattern
+- Stored Procedures & Triggers (planned)
+
+---
+
+## 📂 Project Structure
 
 src/
-├── DAO/ # Data Access Objects (CRUD operations)
-├── Entities/ # Entity classes (Pessoa, NotaFiscal, Produto, etc.)
-├── Controllers/ # Business logic controllers
-├── Services/ # Services for transactions and invoices
-├── Utils/ # Utility classes (e.g., JPAUtils)
+├── DAO/ # Data Access Objects
+├── Entities/ # JPA Entities (Pessoa, Produto, NotaFiscal, etc.)
+├── Services/ # Business logic & automation
+├── Interfaces/ # DAO interfaces
+├── Utils/ # Utility classes (JPA setup, etc.)
+├── Controllers/ # (Planned for future)
+└── resources/ # Configuration files (persistence.xml)
 
-markdown
+yaml
 Copiar código
 
-## 🔑 **Main Entities**
+---
 
-- **Pessoa** (Customer)
-- **PessoaFisica** (Individual Customer)
-- **PessoaJuridica** (Corporate Customer)
-- **Produto** (Product)
-- **Movimentacao** (Transaction)
-- **MovimentacaoItem** (Transaction Item)
-- **NotaFiscal** (Invoice)
-- **NotaFiscalItem** (Invoice Item)
+## 🧠 Business Logic Example
 
-## 🚀 **Features (In Progress)**
+- When a `Movimentacao` (transaction) is registered:
+  - Products are automatically linked via an intermediate table.
+  - A `NotaFiscal` (invoice) is generated and persisted.
+- If a cancellation is requested:
+  - The system checks the time passed since the sale.
+  - If more than **10 minutes** have passed, cancellation is **blocked**.
+  - If not, both the transaction and invoice are automatically canceled.
 
-- Create and persist transactions (`Movimentacao`)
-- Generate and manage invoices (`NotaFiscal`)
-- Register and manage customers (`PessoaFisica` & `PessoaJuridica`)
-- Implement reporting and queries
-- Add validations and business rules
-- Integrate advanced database triggers
+This logic ensures **data integrity** and simulates **real-world fiscal constraints**.
 
-## 📖 **How to Run**
+---
 
-1. Clone the repository:
+## 🚀 Getting Started
 
-   ```bash
-   git clone https://github.com/your-username/smartflow.git
-Import the project into your IDE (IntelliJ / Eclipse).
+1. **Clone the repository**
 
-Configure your MySQL database and update persistence.xml.
+```bash
+git clone https://github.com/your-username/smartflow.git
+Import into your IDE (IntelliJ, Eclipse, etc.)
 
-Run the application and test the features.
+Configure the database
 
-📝 Roadmap
-Add unit tests (JUnit)
+Update the persistence.xml file with your MySQL credentials and connection details.
 
-Create REST API layer
+Run the main class
 
-Implement front-end integration
+Execute Main.java to start using the system.
 
-Expand reporting module
+📈 Roadmap (Coming Soon)
+ Unit tests (JUnit)
+
+ REST API (Spring Boot)
+
+ Front-end integration
+
+ Reporting & analytics module
+
+ Stored procedures and DB triggers
 
 🤝 Contributing
-This project is open for contributions and improvements. Feel free to fork the repository and submit pull requests.
+Pull requests are welcome. This project is open for learning, improvements, and community contributions.
 
 📜 License
 This project is licensed under the MIT License.
