@@ -74,16 +74,6 @@ Run the main class
 
 Execute Main.java to start using the system.
 
-📈 Roadmap (Coming Soon)
- Unit tests (JUnit)
-
- REST API (Spring Boot)
-
- Front-end integration
-
- Reporting & analytics module
-
- Stored procedures and DB triggers
 
 🤝 Contributing
 Pull requests are welcome. This project is open for learning, improvements, and community contributions.
